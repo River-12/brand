@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="category.products.list">
+            <action method="setTemplate" ifconfig="brand/general/enable">
+                <argument name="template" xsi:type="string">Riverstone_ShopbyBrand::product/list.phtml</argument>
+            </action>
+            <arguments>
+                <argument name="view_model" xsi:type="object">Riverstone\ShopbyBrand\ViewModel\Category</argument>
+            </arguments>
+        </referenceBlock>
+
+        <referenceContainer name="sidebar.main">
+            <block class="Magento\LayeredNavigation\Block\Navigation" name="catalog.leftnav">
+                <arguments>
+                    <argument name="template" xsi:type="string">Riverstone_ShopbyBrand::layer/filter.phtml</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

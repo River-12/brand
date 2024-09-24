@@ -1,0 +1,56 @@
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+/** @var \Riverstone\ShopbyBrand\ViewModel\Product $viewModel */
+$viewModel = $block->getViewModel();
+
+$brandDetails = $viewModel->getProductAttributeValue();
+$showLogo = $viewModel->getBrandLogo();
+$showName = $viewModel->getBrandName();
+$showDescription = $viewModel->getBrandDescription();
+?>
+
+<?php if (!empty($brandDetails)): ?>
+    <div class="product-brand">
+        <?php if ($showLogo && !empty($brandDetails['image'])): ?>
+            <div class="brand-image">
+                <img src="<?= $block->escapeUrl($brandDetails['image']); ?>" alt="<?= $block->escapeHtml($brandDetails['name']); ?>">
+            </div>
+        <?php endif; ?>
+        <?php if ($showName && !empty($brandDetails['name'])): ?>
+            <h2 class="brand-name"><?= $block->escapeHtmlAttr($brandDetails['name']); ?></h2>
+        <?php endif; ?>
+        <?php if ($showDescription && !empty($brandDetails['description'])): ?>
+            <div class="brand-description">
+                <?= $block->escapeHtml($brandDetails['description']); ?>
+            </div>
+        <?php endif; ?>
+    </div>
+<?php endif; ?>
+
+<style>
+
+.brand-name {
+    font-size: 1.5em;
+    margin: 10px 0;
+    margin-top: 10px;
+    padding-right: 200px;
+}
+
+.brand-image img {
+    width: 200px; /* Fixed width for the brand image */
+    height: 200px; /* Fixed height for the brand image */
+    object-fit: cover; /* Ensure the image covers the specified dimensions without distortion */
+}
+
+.brand-description {
+    font-size: 1em;
+    margin-top: 10px;
+    text-align: left;
+    max-width: 600px;
+    margin: 10px auto;
+}
+.brand-logo {
+    width: 180px;
+}
+
+</style>

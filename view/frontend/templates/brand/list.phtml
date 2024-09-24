@@ -1,0 +1,112 @@
+<?php
+/** @var \Riverstone\ShopbyBrand\Block\Brand\BrandList $block */
+$brandCollection = $block->getBrandCollection();
+$customerGroupId = $block->getCustomerGroupId();
+$storeId = $block->getStoreId();
+?>
+
+<?php if ($brandCollection->getSize()): ?>
+    <div class="brand-list">
+        <?php foreach ($brandCollection as $brand): ?>
+            <?php
+                $brandCustomerGroups = json_decode($brand->getCustomerGroup(), true);
+                $brandStores = json_decode($brand->getStore(), true);
+            ?>
+            <?php if ($brand->getStatus() == 1): ?>
+                <div class="brand-item" data-brand-id="<?= $block->escapeHtml($brand->getId()) ?>">
+                    <div class="brand-logo">
+                        <img src="<?= $block->escapeUrl($brand->getImage()) ?>" alt="<?= $block->escapeHtml($brand->getBrandName()) ?>">
+                    </div>
+                    <div class="brand-name">
+                        <?= $block->escapeHtml($brand->getBrandName()) ?>
+                    </div>
+                    <div class="brand-name">
+                        <?= $block->escapeHtml($brand->getDescription()) ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </div>
+<?php else: ?>
+    <div class="message info">
+        <div><?= $block->escapeHtml(__('No brands available at the moment.')) ?></div>
+    </div>
+<?php endif; ?>
+
+
+<script>
+    require(['jquery'], function($) {
+        $(document).ready(function () {
+            $('.brand-item').on('click', function (e) {
+                e.preventDefault(); // Prevent the default action of the event
+                var brandId = $(this).data('brand-id');
+                console.log(brandId);
+                console.log('test');
+                $.ajax({
+                    url: '<?= $block->escapeUrl($block->getUrl('brand/index/productList')); ?>',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        brandId: brandId
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                        // Redirect to product list page with brand ID as query parameter
+                        window.location.href = '<?= $block->escapeUrl($block->getUrl('brand/index/products')); ?>?brandId=' + encodeURIComponent(brandId);
+                         }
+                     },
+                        error: function (xhr, status, error) {
+                            console.error('AJAX error: ' + error);
+                    }
+                });
+            });
+        });
+    });
+
+</script>
+
+<style>
+.brand-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.brand-item {
+    text-align: center;
+}
+
+.brand-logo img {
+    width: 100%; /* Set a fixed width */
+    height: auto; /* Set a fixed height */
+    object-fit: cover;
+}
+
+.brand-name {
+    margin-top: 10px;
+}
+
+.brand-name {
+    margin-top: 10px;
+    padding-right: 200px;
+}
+.brand-logo {
+    width: 180px;
+}
+
+.brand-list {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-between; 
+    gap: 10px; 
+}
+
+.brand-item {
+    flex: 1 1 30%; 
+    margin: 5px; 
+    padding: 10px;
+    background-color: #f9f9f9; 
+    text-align: center;
+}
+
+</style>

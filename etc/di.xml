@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="brand_listing_data_source" xsi:type="string">
+                    Riverstone\ShopbyBrand\Model\ResourceModel\Brand\Grid\Collection
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Riverstone\ShopbyBrand\Model\ResourceModel\Brand\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">riverstone_brand</argument>
+            <argument name="resourceModel" xsi:type="string">Riverstone\ShopbyBrand\Model\ResourceModel\Brand</argument>
+            <argument name="eventPrefix" xsi:type="string">brand_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">brand_grid_collection</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Riverstone\ShopbyBrand\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">label/tmp/image</argument>
+            <argument name="basePath" xsi:type="string">label/image</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+        </arguments>
+    </type>
+    
+</config>

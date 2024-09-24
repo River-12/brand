@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+   <table name="riverstone_brand" resource="default" engine="innodb" comment="MD Helloworld">
+      <column xsi:type="int" name="id" padding="7" unsigned="false" nullable="false" identity="true" comment="ID" />
+      <column xsi:type="int" name="status" padding="7" unsigned="false" nullable="false" comment="status" />
+      <column xsi:type="varchar" name="brand_name" nullable="false" length="20" comment="Brand Name" />
+      <column xsi:type="varchar" name="description" nullable="false" length="255" comment="Description" />
+      <column xsi:type="varchar" name="image" nullable="false" length="255" comment="Image Path"/>
+      <column xsi:type="varchar" name="banner_image" nullable="false" length="255" comment="Banner Image Path"/>
+      <column xsi:type="varchar" name="store" nullable="false" length="255" comment="Store Views" />
+      <column xsi:type="varchar" name="customer_group" nullable="false" length="255" comment="Customer Group" />
+      <column xsi:type="varchar" name="url_key" nullable="false" length="255" comment="URL Key" />
+      <column xsi:type="varchar" name="position" nullable="false" length="255" comment="Position" />
+      <column xsi:type="varchar" name="meta_title" nullable="false" length="255" comment="Page Title" />
+      <column xsi:type="varchar" name="meta_description" nullable="false" length="255" comment="Page Description" />
+      <column xsi:type="varchar" name="meta_keywords" nullable="false" length="255" comment="Page Keywords" />
+      <column xsi:type="int" name="assign_products" padding="10" nullable="false" unsigned="true" comment="Assign Products"/>
+      <column xsi:type="timestamp" name="creation_time" default="CURRENT_TIMESTAMP" on_update="false" nullable="false" comment="Creation Time"/>
+        <column xsi:type="timestamp" name="update_time" default="CURRENT_TIMESTAMP" on_update="true" nullable="false" comment="Modification Time"/>
+      <constraint xsi:type="primary" referenceId="PRIMARY">
+         <column name="id" />
+      </constraint>
+   </table>
+</schema>

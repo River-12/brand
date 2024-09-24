@@ -1,0 +1,41 @@
+<?php
+/** @var \Magento\LayeredNavigation\Block\Navigation $block */
+$layer = $block->getLayer();
+
+
+
+if ($layer) {
+    // Debugging
+    echo 'Layer is available';
+
+    $filterableAttributes = $layer->getFilterableAttributes();
+
+    foreach ($filterableAttributes as $attribute) {
+        if ($attribute->getAttributeCode() == 'brand_name') { // Replace 'brand_name' with your custom attribute code
+            $filter = $block->getChildBlock('layer_filter_' . $attribute->getAttributeCode());
+
+            if ($filter) {
+                $filterItems = $filter->getItems();
+                ?>
+                <div class="filter-item">
+                    <h2><?= $block->escapeHtml(__('Brands')); ?></h2>
+                    <ul>
+                        <?php foreach ($filterItems as $item): ?>
+                            <li>
+                                <a href="<?=  $block->escapeUrl($item->getUrl()); ?>">
+                                    <?= $block->escapeHtml($item->getLabel()); ?>
+                                    (<?= $block->escapeHtml($item->getCount()); ?>)</a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+                <?php
+            } else {
+                echo 'Filter block is not available.';
+            }
+        }
+    }
+} else {
+    echo 'Layer block is not available.';
+}
+?>

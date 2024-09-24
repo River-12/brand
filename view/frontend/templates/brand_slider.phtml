@@ -1,0 +1,84 @@
+<div class="brand-slider">
+    <?php if (!empty($brands = $block->getBrandCollection()) && count($brands)): ?>
+        <div class="brand-slider-container">
+            <?php foreach ($brands as $brand): ?>
+                <?php if ($brand->getStatus() == 1): ?>
+                <div class="brand-item" data-brand-id="<?= $block->escapeHtml($brand->getId()) ?>">
+                    <div class="brand-logo">
+                        <img src="<?= $block->escapeUrl($brand->getImage()) ?>"
+                             alt="<?= $block->escapeHtml($brand->getBrandName()) ?>">
+                    </div>
+                    <div class="brand-name">
+                        <?= $block->escapeHtml($brand->getBrandName()) ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+            <?php endforeach; ?>
+        </div>
+    <?php else: ?>
+        <p><?= $block->escapeHtml(__('No brands available.')); ?></p>
+    <?php endif; ?>
+</div>
+
+
+
+<script>
+    require([
+        'jquery',
+        'slick'
+    ], function($) {
+        $(document).ready(function() {
+            $('.brand-slider-container').slick({
+                slidesToShow: 4,  // Adjust based on how many images you want visible
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 1500,
+                arrows: true,
+                dots: true,
+                infinite: true,
+                pauseOnFocus: true,
+                pauseOnHover: true,
+                speed: 300,
+                centerMode: true,  // Enable centering of the slides
+                centerPadding: '40px',
+            });
+
+            $('.brand-item').on('click', function(event) {
+                event.preventDefault();
+                var brandId = $(this).data('brand-id');
+
+                $.ajax({
+                    url: '<?= $block->escapeUrl($block->getUrl('brand/index/productList')); ?>',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        brandId: brandId
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                        window.location.href = '<?= $block->escapeUrl($block->getUrl('brand/index/products'));
+                        ?>?brandId=' + encodeURIComponent(brandId);
+                         }
+                     },
+                        error: function (xhr, status, error) {
+                            console.error('AJAX error: ' + error);
+                    }
+                });
+            });
+        });
+    });
+</script>
+
+<style>
+.brand-item img {
+    display: block; /* Ensure images are displayed as block elements */
+    max-width: 100%; /* Constrain image to container width */
+    height: 100px; /* Maintain aspect ratio */
+}
+
+.brand-item {
+    width: 100%; /* Ensure container takes up the available width */
+    max-width: 100%; /* Ensure container does not exceed the available width */
+}
+
+</style>

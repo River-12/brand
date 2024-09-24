@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+       <add id="Riverstone_ShopbyBrand::elements" title="Shop by Brand" module="Riverstone_ShopbyBrand" sortOrder="50" resource="Riverstone_ShopbyBrand::elements"/>
+       <add id="Riverstone_ShopbyBrand::brands" title="Brand" module="Riverstone_ShopbyBrand" sortOrder="20" parent="Riverstone_ShopbyBrand::elements" action="brand/index/index" resource="Riverstone_ShopbyBrand::brands"/>
+    </menu>
+</config>

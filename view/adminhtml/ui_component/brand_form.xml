@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">brand_form.brand_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">General Information</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="save" class="Riverstone\ShopbyBrand\Block\Adminhtml\Edit\Button\SaveButton"/>
+            <button name="back" class="Riverstone\ShopbyBrand\Block\Adminhtml\Edit\Button\BackButton"/>
+            <button name="save_and_continue" class="Riverstone\ShopbyBrand\Block\Adminhtml\Edit\Button\SaveAndContinueButton"/>
+            <button name="delete" class="Riverstone\ShopbyBrand\Block\Adminhtml\Edit\Button\DeleteButton"/>
+        </buttons>
+        <namespace>brand_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>brand_form.brand_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="brand_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="brand/index/save"/>
+        </settings>
+        <dataProvider class="Riverstone\ShopbyBrand\Model\DataProvider" name="brand_form_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general">
+        <settings>
+            <label>General</label>
+        </settings>
+        <field name="status" sortOrder="10" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">brand</item>
+                    <item name="default" xsi:type="number">1</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>boolean</dataType>
+                <label translate="true">Enable Brand</label>
+                <dataScope>status</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="string">0</map>
+                            <map name="true" xsi:type="string">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+
+         <field name="brand_name" sortOrder="20" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">brand</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <label translate="true">Title</label>
+                <dataScope>brand_name</dataScope>
+            </settings>
+        </field>
+        <field name="description" sortOrder="30" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">brand</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <label translate="true">Description</label>
+                <dataScope>description</dataScope>
+            </settings>
+        </field>
+         <field name="store">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Cms\Ui\Component\Listing\Column\Cms\Options</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Store View</item>
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="formElement" xsi:type="string">multiselect</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="source" xsi:type="string">brand</item>
+                    <item name="dataScope" xsi:type="string">store</item>
+                </item>
+            </argument>
+        </field>
+       <field name="customer_group">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Customer\Ui\Component\Listing\Column\Group\Options
+                </item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Customer Groups</item>
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="formElement" xsi:type="string">multiselect</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="source" xsi:type="string">brand</item>
+                    <item name="dataScope" xsi:type="string">customer_group</item>
+                </item>
+            </argument>
+        </field>
+        <field name="image">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="label" xsi:type="string" translate="true"> Image </item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="allowedExtensions" xsi:type="string">jpg jpeg png</item>
+                    <item name="maxFileSize" xsi:type="number">4194304</item>
+                    <item name="formElement" xsi:type="string">imageUploader</item>
+                    <item name="previewTmpl" xsi:type="string">Riverstone_ShopbyBrand/image-preview</item>
+                    <item name="elementTmpl" xsi:type="string">ui/form/element/uploader/uploader</item>
+                    <item name="dataScope" xsi:type="string">image</item>
+                    <item name="sortOrder" xsi:type="number">40</item>
+                    <item name="uploaderConfig" xsi:type="array">
+                        <item name="url" xsi:type="url" path="brand/image/upload">
+                            <param name="target_element_id">image</param>
+                            <param name="type">image</param>
+                        </item>
+                    </item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="banner_image">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="label" xsi:type="string" translate="true"> Banner Image </item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="allowedExtensions" xsi:type="string">jpg jpeg png</item>
+                    <item name="maxFileSize" xsi:type="number">4194304</item>
+                    <item name="formElement" xsi:type="string">imageUploader</item>
+                    <item name="previewTmpl" xsi:type="string">Riverstone_ShopbyBrand/image-preview</item>
+                    <item name="elementTmpl" xsi:type="string">ui/form/element/uploader/uploader</item>
+                    <item name="dataScope" xsi:type="string">banner_image</item>
+                    <item name="sortOrder" xsi:type="number">50</item>
+                    <item name="uploaderConfig" xsi:type="array">
+                        <item name="url" xsi:type="url" path="brand/image/bannerupload">
+                            <param name="target_element_id">banner_image</param>
+                            <param name="type">banner_image</param>
+                        </item>
+                    </item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="url_key" sortOrder="60" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">brand</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>string</dataType>
+                <label translate="true">Url Key</label>
+                <dataScope>url_key</dataScope>
+            </settings>
+        </field>
+        <field name="position" sortOrder="70" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">brand</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="validate-digits" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Position</label>
+                <dataScope>position</dataScope>
+            </settings>
+        </field>
+        <field name="meta_title" sortOrder="80" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">brand</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>string</dataType>
+                <label translate="true">Meta Title</label>
+                <dataScope>meta_title</dataScope>
+            </settings>
+        </field>
+        <field name="meta_description" sortOrder="90" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">brand</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>string</dataType>
+                <label translate="true">Meta Description</label>
+                <dataScope>meta_description</dataScope>
+            </settings>
+        </field>
+        <field name="meta_keywords" sortOrder="100" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">brand</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>string</dataType>
+                <label translate="true">Meta Keywords</label>
+                <dataScope>meta_keywords</dataScope>
+            </settings>
+        </field>
+    </fieldset>
+    
+</form>

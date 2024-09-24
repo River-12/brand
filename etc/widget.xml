@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget class="Riverstone\ShopbyBrand\Block\Widget\BrandSlide" id="riverstone_shop_brand">
+        <label>Riverstone Shop By Brands</label>
+        <description>This widget is responsible for rendering the brands.</description>
+    </widget>
+</widgets>
