@@ -33,7 +33,7 @@
                 slidesToScroll: 1,
                 autoplay: true,
                 autoplaySpeed: 1500,
-                arrows: true,
+                arrows: false,
                 dots: true,
                 infinite: true,
                 pauseOnFocus: true,
@@ -71,14 +71,19 @@
 
 <style>
 .brand-item img {
-    display: block; /* Ensure images are displayed as block elements */
-    max-width: 100%; /* Constrain image to container width */
-    height: 100px; /* Maintain aspect ratio */
+    display: block; 
+    max-width: 100%; 
+    height: auto; 
 }
 
 .brand-item {
-    width: 100%; /* Ensure container takes up the available width */
-    max-width: 100%; /* Ensure container does not exceed the available width */
+    width: 100%; 
+    max-width: 100%; 
+}
+
+.brand-name {
+    text-align: center;
+    padding: 15px 0;
 }
 
 </style>
