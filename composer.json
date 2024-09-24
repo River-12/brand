@@ -1,0 +1,26 @@
+{
+  "name": "riverstone/brand",
+  "version": "1.0.0",
+  "description": "The Module allows to customers easily find & filter products of their favorite brands",
+  "type": "magento2-module",
+   "require": {
+        "magento/framework": "102.*|103.*"
+    },
+  "authors": [
+{
+     "name": "Riverstone Technology Unlimited",
+     "email": "info@riverstonetech.com",
+     "homepage": "https://www.riverstonetech.com",
+     "role": "Technical Support"
+    }
+  ],
+  "license": "MIT",
+  "autoload": {
+"files": [
+     "registration.php"
+],
+      "psr-4": {
+     "Riverstone\\ShopbyBrand\\": ""
+       }
+  }
+ }
