@@ -17,16 +17,6 @@ class Data extends AbstractHelper
     protected const XML_PATH_CATEGORY_BRAND_NAME = 'brand/category/brand_name';
 
     /**
-     * Data constructor.
-     *
-     * @param Context $context
-     */
-    public function __construct(Context $context)
-    {
-        parent::__construct($context);
-    }
-
-    /**
      * Check module enabled
      *
      * @return bool

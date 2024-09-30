@@ -13,15 +13,16 @@ $storeId = $block->getStoreId();
                 $brandStores = json_decode($brand->getStore(), true);
             ?>
             <?php if ($brand->getStatus() == 1): ?>
-                <div class="brand-item" data-brand-id="<?= $block->escapeHtml($brand->getId()) ?>">
+                <div class="brand-item" data-brand-id="<?= $escaper->escapeHtml($brand->getId()) ?>">
                     <div class="brand-logo">
-                        <img src="<?= $block->escapeUrl($brand->getImage()) ?>" alt="<?= $block->escapeHtml($brand->getBrandName()) ?>">
+                        <img src="<?= $escaper->escapeUrl($brand->getImage()) ?>" 
+                        alt="<?= $escaper->escapeHtml($brand->getBrandName()) ?>">
                     </div>
                     <div class="brand-name">
-                        <?= $block->escapeHtml($brand->getBrandName()) ?>
+                        <?= $escaper->escapeHtml($brand->getBrandName()) ?>
                     </div>
                     <div class="brand-name">
-                        <?= $block->escapeHtml($brand->getDescription()) ?>
+                        <?= $escaper->escapeHtml($brand->getDescription()) ?>
                     </div>
                 </div>
             <?php endif; ?>
@@ -29,10 +30,9 @@ $storeId = $block->getStoreId();
     </div>
 <?php else: ?>
     <div class="message info">
-        <div><?= $block->escapeHtml(__('No brands available at the moment.')) ?></div>
+        <div><?= $escaper->escapeHtml(__('No brands available at the moment.')) ?></div>
     </div>
 <?php endif; ?>
-
 
 <script>
     require(['jquery'], function($) {
@@ -43,7 +43,7 @@ $storeId = $block->getStoreId();
                 console.log(brandId);
                 console.log('test');
                 $.ajax({
-                    url: '<?= $block->escapeUrl($block->getUrl('brand/index/productList')); ?>',
+                    url: '<?= $escaper->escapeUrl($block->getUrl('brand/index/productList')); ?>',
                     type: 'POST',
                     dataType: 'json',
                     data: {
@@ -51,18 +51,19 @@ $storeId = $block->getStoreId();
                     },
                     success: function (response) {
                         if (response.success) {
-                        // Redirect to product list page with brand ID as query parameter
-                        window.location.href = '<?= $block->escapeUrl($block->getUrl('brand/index/products')); ?>?brandId=' + encodeURIComponent(brandId);
-                         }
-                     },
-                        error: function (xhr, status, error) {
-                            console.error('AJAX error: ' + error);
+                            // Redirect to product list page with brand ID as query parameter
+                            window.location.href = 
+                                '<?= $escaper->escapeUrl($block->getUrl('brand/index/products')); ?>' + 
+                                '?brandId=' + encodeURIComponent(brandId);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('AJAX error: ' + error);
                     }
                 });
             });
         });
     });
-
 </script>
 
 <style>
@@ -81,9 +82,7 @@ $storeId = $block->getStoreId();
   padding: 10px 0;
 }
 
-
 .brand-item {
     text-align: center;
 }
-
 </style>

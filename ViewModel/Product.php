@@ -68,7 +68,8 @@ class Product implements ArgumentInterface
             $prodvar = $this->registry->registry('current_product');
             $productId = $prodvar->getId();
             $product = $this->product->load($productId);
-            $pdtattributevalue =$this->product->getResource()->getAttribute('brand_name')->getFrontend()->getValue($product);
+            $pdtattributevalue =$this->product->getResource()->getAttribute('brand_name')
+            ->getFrontend()->getValue($product);
 
             $brandModel = $this->brandFactory->create();
             $brandModel->load($pdtattributevalue, 'brand_name');

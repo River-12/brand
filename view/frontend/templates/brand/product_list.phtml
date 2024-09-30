@@ -6,53 +6,81 @@ $brandDetails = $block->getBrandDetails();
 
 <?php if (!empty($brandDetails['banner_image'])): ?>
     <div class="brand-banner">
-        <img src="<?= $block->escapeUrl($brandDetails['banner_image']); ?>"
-             alt="<?= $block->escapeHtml($brandDetails['brand_name']); ?>">
+        <img src="<?= $escaper->escapeUrl($brandDetails['banner_image']); ?>"
+             alt="<?= $escaper->escapeHtml($brandDetails['brand_name']); ?>">
     </div>
 <?php endif; ?>
 <?php if ($products && $products->getSize()): ?>
     <div class="brand-products">
         <?php foreach ($products as $product): ?>
             <div class="product-item">
-                <div class="product-item-info" id="product-item-info_<?= $block->escapeHtml($product->getId()); ?>"
+                <div class="product-item-info" id="product-item-info_<?= $escaper->escapeHtml($product->getId()); ?>"
                      data-container="product-grid">
-                    <a href="<?= $block->escapeUrl($product->getProductUrl()); ?>"
+                    <a href="<?= $escaper->escapeUrl($product->getProductUrl()); ?>"
                        class="product photo product-item-photo" tabindex="-1">
                         <span class="product-image-container" style="width: 240px;">
                             <span class="product-image-wrapper" style="padding-bottom: 125%;">
-                                <img class="product-image-photo" src="<?= $block->escapeUrl($block->getImageUrl($product)); ?>" loading="lazy" width="240" height="300" alt="<?= $block->escapeHtmlAttr($product->getName()); ?>">
+                                <img class="product-image-photo"
+                                     src="<?= $escaper->escapeUrl($block->getImageUrl($product)); ?>"
+                                     loading="lazy" width="240" height="300"
+                                     alt="<?= $escaper->escapeHtmlAttr($product->getName()); ?>">
                             </span>
                         </span>
                     </a>
                     <div class="product details product-item-details">
                         <strong class="product name product-item-name">
-                            <a class="product-item-link" href="<?= $block->escapeUrl($product->getProductUrl()); ?>">
-                                <?= $block->escapeHtml($product->getName()); ?>
+                            <a class="product-item-link"
+                               href="<?= $escaper->escapeUrl($product->getProductUrl()); ?>">
+                                <?= $escaper->escapeHtml($product->getName()); ?>
                             </a>
                         </strong>
-                        <div class="price-box price-final_price" data-role="priceBox" data-product-id="<?= $block->escapeHtml($product->getId()); ?>"
-                             data-price-box="product-id-<?=$block->escapeHtml($product->getId()); ?>">
+                        <div class="price-box price-final_price"
+                             data-role="priceBox"
+                             data-product-id="<?= $escaper->escapeHtml($product->getId()); ?>"
+                             data-price-box="product-id-<?= $escaper->escapeHtml($product->getId()); ?>">
                             <span class="price-container price-final_price tax weee">
-                                <span id="product-price-<?= $block->escapeHtml($product->getId()); ?>" data-price-amount="<?= $block->escapeHtml($product->getPrice()); ?>" data-price-type="finalPrice" class="price-wrapper ">
-                                    <span class="price"><?= $block->escapeHtml($product->getFinalPrice()); ?></span>
+                                <span id="product-price-<?= $escaper->escapeHtml($product->getId()); ?>"
+                                      data-price-amount="<?= $escaper->escapeHtml($product->getPrice()); ?>"
+                                      data-price-type="finalPrice" class="price-wrapper">
+                                    <span class="price"><?= $escaper->escapeHtml($product->getFinalPrice()); ?></span>
                                 </span>
                             </span>
                         </div>
                         <div class="product-item-inner">
                             <div class="product actions product-item-actions">
                                 <div class="actions-primary">
-                                    <form action="<?= $block->escapeUrl($block->getAddToCartUrl($product)); ?>" method="post">
-                                        <button type="submit" title="<?= $block->escapeHtml(__('Add to Cart')); ?>" class="action tocart primary">
-                                            <span><?= $block->escapeHtml(__('Add to Cart')); ?></span>
+                                    <form action="<?= $escaper->escapeUrl($block->getAddToCartUrl($product)); ?>"
+                                          method="post">
+                                        <button type="submit"
+                                                title="<?= $escaper->escapeHtml(__('Add to Cart')); ?>"
+                                                class="action tocart primary">
+                                            <span><?= $escaper->escapeHtml(__('Add to Cart')); ?></span>
                                         </button>
                                     </form>
                                 </div>
                                 <div class="actions-secondary">
-                                    <a href="#" class="action towishlist" title="<?=$block->escapeHtml(__('Add to Wish List')); ?>" aria-label="<?=$block->escapeHtml(__('Add to Wish List')); ?>" data-post='{"action":"<?= $block->escapeUrl($block->getAddToWishlistUrl($product)); ?>","data":{"product":<?= $block->escapeHtml($product->getId()); ?>,"uenc":"<?= $block->escapeUrl($block->getCurrentUrl()); ?>"}}' data-action="add-to-wishlist" role="button">
-                                        <span><?= $block->escapeHtml(__('Add to Wish List')); ?></span>
+                                    <a href="#" class="action towishlist"
+                                       title="<?= $escaper->escapeHtml(__('Add to Wish List')); ?>"
+                                       aria-label="<?= $escaper->escapeHtml(__('Add to Wish List')); ?>"
+                                       data-post='{
+                                           "action":"<?= $escaper->
+                                            escapeUrl($block->getAddToWishlistUrl($product)); ?>",
+                                           "data":{"product":<?= $escaper->escapeHtml($product->getId()); ?>,
+                                           "uenc":"<?= $escaper->escapeUrl($block->getCurrentUrl()); ?>"}
+                                       }'
+                                       data-action="add-to-wishlist" role="button">
+                                        <span><?= $escaper->escapeHtml(__('Add to Wish List')); ?></span>
                                     </a>
-                                    <a href="#" class="action tocompare" title="<?= $block->escapeHtml(__('Add to Compare')); ?>" aria-label="<?= $block->escapeHtml(__('Add to Compare')); ?>" data-post='{"action":"<?= $block->escapeUrl($block->getAddToCompareUrl($product)); ?>","data":{"product":<?= $block->escapeHtml($product->getId()); ?>,"uenc":"<?= $block->escapeUrl($block->getCurrentUrl()); ?>"}}' role="button">
-                                        <span><?= $block->escapeHtml(__('Add to Compare')); ?></span>
+                                    <a href="#" class="action tocompare"
+                                       title="<?= $escaper->escapeHtml(__('Add to Compare')); ?>"
+                                       aria-label="<?= $escaper->escapeHtml(__('Add to Compare')); ?>"
+                                       data-post='{
+                                           "action":"<?= $escaper->escapeUrl($block->getAddToCompareUrl($product)); ?>",
+                                           "data":{"product":<?= $escaper->escapeHtml($product->getId()); ?>,
+                                           "uenc":"<?= $escaper->escapeUrl($block->getCurrentUrl()); ?>"}
+                                       }'
+                                       role="button">
+                                        <span><?= $escaper->escapeHtml(__('Add to Compare')); ?></span>
                                     </a>
                                 </div>
                             </div>
@@ -63,7 +91,7 @@ $brandDetails = $block->getBrandDetails();
         <?php endforeach; ?>
     </div>
 <?php else: ?>
-    <p><?= $block->escapeHtml(__('No products found for this brand.')); ?></p>
+    <p><?= $escaper->escapeHtml(__('No products found for this brand.')); ?></p>
 <?php endif; ?>
 
 

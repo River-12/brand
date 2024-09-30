@@ -14,6 +14,9 @@ class Collection extends AbstractCollection
      */
     protected function _construct()
     {
-        $this->_init('Riverstone\ShopbyBrand\Model\Brand', 'Riverstone\ShopbyBrand\Model\ResourceModel\Brand');
+        $this->_init(
+            \Riverstone\ShopbyBrand\Model\Brand::class,
+            \Riverstone\ShopbyBrand\Model\ResourceModel\Brand::class
+        );
     }
 }

@@ -55,6 +55,8 @@ class DataProvider extends AbstractDataProvider implements DataProviderInterface
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
     }
 
+    // phpcs:disable
+
     /**
      * Get the data
      *
@@ -101,4 +103,5 @@ class DataProvider extends AbstractDataProvider implements DataProviderInterface
 
         return $this->loadedData;
     }
+    // phpcs:enable
 }

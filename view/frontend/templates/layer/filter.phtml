@@ -18,13 +18,13 @@ if ($layer) {
                 $filterItems = $filter->getItems();
                 ?>
                 <div class="filter-item">
-                    <h2><?= $block->escapeHtml(__('Brands')); ?></h2>
+                    <h2><?= $escaper->escapeHtml(__('Brands')); ?></h2>
                     <ul>
                         <?php foreach ($filterItems as $item): ?>
                             <li>
-                                <a href="<?=  $block->escapeUrl($item->getUrl()); ?>">
-                                    <?= $block->escapeHtml($item->getLabel()); ?>
-                                    (<?= $block->escapeHtml($item->getCount()); ?>)</a>
+                                <a href="<?=  $escaper->escapeUrl($item->getUrl()); ?>">
+                                    <?= $escaper->escapeHtml($item->getLabel()); ?>
+                                    (<?= $escaper->escapeHtml($item->getCount()); ?>)</a>
                             </li>
                         <?php endforeach; ?>
                     </ul>

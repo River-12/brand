@@ -13,15 +13,16 @@ $showDescription = $viewModel->getBrandDescription();
     <div class="product-brand">
         <?php if ($showLogo && !empty($brandDetails['image'])): ?>
             <div class="brand-image">
-                <img src="<?= $block->escapeUrl($brandDetails['image']); ?>" alt="<?= $block->escapeHtml($brandDetails['name']); ?>">
+                <img src="<?= $escaper->escapeUrl($brandDetails['image']); ?>"
+                 alt="<?= $escaper->escapeHtml($brandDetails['name']); ?>">
             </div>
         <?php endif; ?>
         <?php if ($showName && !empty($brandDetails['name'])): ?>
-            <h2 class="brand-name"><?= $block->escapeHtmlAttr($brandDetails['name']); ?></h2>
+            <h2 class="brand-name"><?= $escaper->escapeHtmlAttr($brandDetails['name']); ?></h2>
         <?php endif; ?>
         <?php if ($showDescription && !empty($brandDetails['description'])): ?>
             <div class="brand-description">
-                <?= $block->escapeHtml($brandDetails['description']); ?>
+                <?= $escaper->escapeHtml($brandDetails['description']); ?>
             </div>
         <?php endif; ?>
     </div>

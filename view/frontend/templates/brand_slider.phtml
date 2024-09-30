@@ -3,20 +3,20 @@
         <div class="brand-slider-container">
             <?php foreach ($brands as $brand): ?>
                 <?php if ($brand->getStatus() == 1): ?>
-                <div class="brand-item" data-brand-id="<?= $block->escapeHtml($brand->getId()) ?>">
+                <div class="brand-item" data-brand-id="<?= $escaper->escapeHtml($brand->getId()) ?>">
                     <div class="brand-logo">
-                        <img src="<?= $block->escapeUrl($brand->getImage()) ?>"
-                             alt="<?= $block->escapeHtml($brand->getBrandName()) ?>">
+                        <img src="<?= $escaper->escapeUrl($brand->getImage()) ?>"
+                             alt="<?= $escaper->escapeHtml($brand->getBrandName()) ?>">
                     </div>
                     <div class="brand-name">
-                        <?= $block->escapeHtml($brand->getBrandName()) ?>
+                        <?= $escaper->escapeHtml($brand->getBrandName()) ?>
                     </div>
                 </div>
             <?php endif; ?>
             <?php endforeach; ?>
         </div>
     <?php else: ?>
-        <p><?= $block->escapeHtml(__('No brands available.')); ?></p>
+        <p><?= $escaper->escapeHtml(__('No brands available.')); ?></p>
     <?php endif; ?>
 </div>
 
@@ -48,7 +48,7 @@
                 var brandId = $(this).data('brand-id');
 
                 $.ajax({
-                    url: '<?= $block->escapeUrl($block->getUrl('brand/index/productList')); ?>',
+                    url: '<?= $escaper->escapeUrl($block->getUrl('brand/index/productList')); ?>',
                     type: 'POST',
                     dataType: 'json',
                     data: {
@@ -56,7 +56,7 @@
                     },
                     success: function (response) {
                         if (response.success) {
-                        window.location.href = '<?= $block->escapeUrl($block->getUrl('brand/index/products'));
+                        window.location.href = '<?= $escaper->escapeUrl($block->getUrl('brand/index/products'));
                         ?>?brandId=' + encodeURIComponent(brandId);
                          }
                      },

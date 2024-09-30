@@ -11,7 +11,7 @@ $showDescription = $viewModel->getBrandDescription();
 
 <?php if (!$block->getLoadedProductCollection()->count()): ?>
     <div class="message info empty">
-        <div><?= $block->escapeHtml(__('We can\'t find products matching the selection.')) ?></div>
+        <div><?= $escaper->escapeHtml(__('We can\'t find products matching the selection.')) ?></div>
     </div>
 <?php else: ?>
     <?= $block->getToolbarHtml() ?>
@@ -44,7 +44,7 @@ $showDescription = $viewModel->getBrandDescription();
                         <?php
                         $productImage = $block->getImage($_product, $imageDisplayArea);
                         ?>
-                        <a href="<?= $block->escapeUrl($_product->getProductUrl()) ?>"
+                        <a href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>"
                            class="product photo product-item-photo"
                            tabindex="-1">
                             <?= $productImage->toHtml() ?>
@@ -52,36 +52,36 @@ $showDescription = $viewModel->getBrandDescription();
                         <div class="product details product-item-details">
                             <strong class="product name product-item-name">
                                 <a class="product-item-link"
-                                   href="<?= $block->escapeUrl($_product->getProductUrl()) ?>">
-                                    <?= $block->escapeHtml($_product->getName()) ?>
+                                   href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>">
+                                    <?= $escaper->escapeHtml($_product->getName()) ?>
                                 </a>
                             </strong>
                             <?php
                             if ($moduleStatus) {
-                            $brandDetails = $viewModel->getBrandDetails($_product);
-                            if (!empty($brandDetails)): ?>
+                                $brandDetails = $viewModel->getBrandDetails($_product);
+                                if (!empty($brandDetails)): ?>
                                 <div class="product-brand">
-                                    <?php if ($showName && !empty($brandDetails['name'])): ?>
+                                        <?php if ($showName && !empty($brandDetails['name'])): ?>
                                         <h2 class="brand-name">
-                                            <?= $block->escapeHtmlAttr($brandDetails['name']); ?>
+                                            <?= $escaper->escapeHtmlAttr($brandDetails['name']); ?>
                                         </h2>
                                     <?php endif; ?>
-                                    <?php if ($showLogo && !empty($brandDetails['image'])): ?>
+                                        <?php if ($showLogo && !empty($brandDetails['image'])): ?>
                                         <div class="brand-image">
-                                            <img src="<?= $block->escapeUrl($brandDetails['image']); ?>"
-                                                    alt="<?= $block->escapeHtml($brandDetails['name']); ?>">
+                                            <img src="<?= $escaper->escapeUrl($brandDetails['image']); ?>"
+                                                    alt="<?= $escaper->escapeHtml($brandDetails['name']); ?>">
                                         </div>
                                     <?php endif; ?>
-                                    <?php if ($showDescription && !empty($brandDetails['description'])): ?>
+                                        <?php if ($showDescription && !empty($brandDetails['description'])): ?>
                                         <div class="brand-description">
-                                            <?= $block->escapeHtml($brandDetails['description']); ?>
+                                            <?= $escaper->escapeHtml($brandDetails['description']); ?>
                                         </div>
                                     <?php endif; ?>
                                 </div>
-                            <?php endif; ?>
+                                <?php endif; ?>
                         <?php } ?>
                             <?= $block->getReviewsSummaryHtml($_product, $templateType) ?>
-                            <?= $block->getProductPrice($_product) ?>
+                            <?= /* @noEscape */ $block->getProductPrice($_product) ?>
 
                             <?= $block->getProductDetailsHtml($_product) ?>
 
@@ -91,22 +91,24 @@ $showDescription = $viewModel->getBrandDescription();
                                         <?php if ($_product->isSaleable()): ?>
                                             <?php $postParams = $block->getAddToCartPostParams($_product); ?>
                                             <form data-role="tocart-form"
-                                                  action="<?= $block->escapeUrl($postParams['action']) ?>"
+                                                  action="<?= $escaper->escapeUrl($postParams['action']) ?>"
                                                   method="post">
                                                 <input type="hidden" name="product"
-                                                       value="<?= $block->escapeHtml($postParams['data']['product']) ?>">
-                                                <input type="hidden" name="<?= \Magento\Framework\App\Action\Action::PARAM_NAME_URL_ENCODED ?>"
-                                                       value="<?= $block->escapeHtml($postParams['data'][\Magento\Framework\App\Action\Action::PARAM_NAME_URL_ENCODED]) ?>">
+                                                value="<?= $escaper->escapeHtml($postParams['data']['product']) ?>">
+                                            <input type="hidden" 
+                                             name="<?= \Magento\Framework\App\Action\Action::PARAM_NAME_URL_ENCODED ?>"
+                                             value="<?= $escaper->escapeHtml($postParams['data']
+                                                [\Magento\Framework\App\Action\Action::PARAM_NAME_URL_ENCODED]) ?>">
                                                 <?= $block->getBlockHtml('formkey') ?>
                                                 <button type="submit"
-                                                        title="<?= $block->escapeHtmlAttr(__('Add to Cart')) ?>"
+                                                        title="<?= $escaper->escapeHtmlAttr(__('Add to Cart')) ?>"
                                                         class="action tocart primary">
-                                                    <span><?= $block->escapeHtml(__('Add to Cart')) ?></span>
+                                                    <span><?= $escaper->escapeHtml(__('Add to Cart')) ?></span>
                                                 </button>
                                             </form>
                                         <?php else: ?>
                                             <div class="stock unavailable">
-                                                <span><?= $block->escapeHtml(__('Out of stock')) ?></span></div>
+                                                <span><?= $escaper->escapeHtml(__('Out of stock')) ?></span></div>
                                         <?php endif; ?>
                                     </div>
                                     <div class="actions-secondary">
